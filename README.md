@@ -17,13 +17,28 @@ npm test           # unit tests
 npm run lint       # type check
 ```
 
-## Deploy for free (Vercel)
+## Deploy for free (Cloudflare Workers)
 
-1. Push this repo to GitHub.
-2. Go to [vercel.com](https://vercel.com), sign in with GitHub, choose **Add New → Project** and import this repo.
-3. Keep the defaults and click **Deploy**. Every push to the main branch redeploys automatically.
+The app runs on Cloudflare Workers through the [OpenNext adapter](https://opennext.js.org/cloudflare). The free plan allows 100,000 requests a day, and the app doesn't sleep when idle.
 
-The Hobby plan is free for personal, non-commercial projects. No environment variables are needed.
+**One-time setup (auto-deploys on every push to `main`):**
+
+1. Sign up or log in at [dash.cloudflare.com](https://dash.cloudflare.com). The free plan is enough.
+2. Go to **Workers & Pages → Create → Import a repository**, connect GitHub and pick this repo.
+3. Use these settings:
+   - **Project name:** `lets-cook` (must match `name` in `wrangler.jsonc`)
+   - **Build command:** `npx opennextjs-cloudflare build`
+   - **Deploy command:** `npx opennextjs-cloudflare deploy`
+4. Click **Deploy**. The site goes live at `https://lets-cook.<your-subdomain>.workers.dev`.
+
+**Or deploy from your own computer:**
+
+```bash
+npx wrangler login
+npm run deploy
+```
+
+Run `npm run preview` to test the app locally in the Cloudflare runtime before deploying.
 
 ## API
 

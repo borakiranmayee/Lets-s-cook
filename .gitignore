@@ -7,3 +7,8 @@ next-env.d.ts
 .env*
 .vercel
 .DS_Store
+
+# Cloudflare
+.open-next/
+.wrangler/
+.dev.vars*
